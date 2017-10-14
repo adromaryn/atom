@@ -10,14 +10,18 @@ import java.util.ListIterator;
 
 public class CustomLinkedList<E> implements List<E> {
 
+    private ListNode<E> first =  null;
+    private ListNode<E> last  =  null;
+    private int size = 0;
+
     @Override
     public int size() {
-        throw new NotImplementedException();
+        return this.size;
     }
 
     @Override
     public boolean isEmpty() {
-        throw new NotImplementedException();
+        return size == 0;
     }
 
     @Override
@@ -32,12 +36,40 @@ public class CustomLinkedList<E> implements List<E> {
 
     @Override
     public boolean add(E e) {
-        throw new NotImplementedException();
+        ListNode<E> node = new ListNode<E>();
+        node.setElement(e);
+        if (last == null) {
+            node.setPrev(node);
+            first = node;
+        } else {
+            node.setPrev(last);
+        }
+        size++;
+        last = node;
     }
 
     @Override
     public boolean remove(Object o) {
-        throw new NotImplementedException();
+        ListNode<E> current = first;
+        for (int i = 0; i < size; i++) {
+            if (current.getObject().equals((E) o)) {
+                if (current == first) {
+                    first == current.getNext();
+                    first.setPrev(first);
+                } else {
+                    current.getPrev().setNext(current.getNext());
+                    current.setNext(null);
+                }
+
+                if (current == last) {
+                    last = current.getPrev();
+                    last.setNext(last);
+                } else {
+                    current.getNext().setPrev(current.getPrev());
+                    current.setPrev(null);
+                }
+            }
+        }
     }
 
     @Override

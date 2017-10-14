@@ -104,3 +104,8 @@ jacocoTestReport {
 coveralls {
     sourceDirs = files(subprojects.sourceSets.main.allSource.srcDirs).files.absolutePath
 }
+
+dependencies {
+    testCompile rootProject.libraries.junit
+    compile rootProject.libraries.log4j
+}
